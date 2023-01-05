@@ -41,7 +41,8 @@ private:
 	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, meta = (AllowPrivateAccess = "true")) // This makes the default value viewable, but you can't edit it in the editor
 	float RunningTime; // This 
 
-
+	UPROPERTY(VisibleAnywhere)
+	UStaticMeshComponent* ItemMesh;
 
 };
 
