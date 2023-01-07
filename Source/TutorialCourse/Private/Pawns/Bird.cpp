@@ -41,9 +41,11 @@ void ABird::BeginPlay()
 
 void ABird::Move(const FInputActionValue& Value)
 {
-	const bool CurrentValue = Value.Get<bool>();
-	if (CurrentValue)
+	const bool DirectionValue = Value.Get<float>();
+	if (Controller && (DirectionValue != 0.f))
 	{
+		FVector Forward = GetActorForwardVector();
+		AddMovementInput(Forward, DirectionValue);
 		UE_LOG(LogTemp, Warning, TEXT("IA_Move triggered"));
 	}
 }
@@ -63,7 +65,5 @@ void ABird::SetupPlayerInputComponent(UInputComponent* PlayerInputComponent)
 	{
 		EnhancedInputComponent->BindAction(MoveAction, ETriggerEvent::Triggered, this, &ABird::Move);
 	}
-
-	// PlayerInputComponent->BindAxis(FName("MoveForward"), this, &ABird::MoveForward); Old method
 }
 
