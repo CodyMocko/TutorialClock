@@ -8,10 +8,12 @@
 #include "InputActionValue.h" // Typically safe to include include files for constructors
 #include "Bird.generated.h" // This needs to be the FINAL include
 
+class UCameraComponent;
 class UCapsuleComponent;
 class USkeletalMeshComponent;
 class UInputAction;
 class UInputMappingContext;
+class USpringArmComponent;
 
 UCLASS()
 class TUTORIALCOURSE_API ABird : public APawn
@@ -36,7 +38,12 @@ protected:
 	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = Input)
 	UInputAction* MoveAction;
 
+	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = Input)
+	UInputAction* LookAction;
+
 	void Move(const FInputActionValue& Value);
+
+	void Look(const FInputActionValue& Value);
 
 private:
 	// Capsule Component for the Bird
@@ -45,4 +52,12 @@ private:
 
 	UPROPERTY(VisibleAnywhere)
 	USkeletalMeshComponent* BirdMesh; // This is no longer the reccommended way to declare pointers in the header file
+
+	UPROPERTY(VisibleAnywhere)
+	USpringArmComponent* SpringArm;
+	
+	UPROPERTY(VisibleAnywhere)
+	UCameraComponent* ViewCamera;
+
+
 };
